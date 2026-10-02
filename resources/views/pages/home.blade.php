@@ -117,7 +117,7 @@
     </section>
 
     {{-- Projects --}}
-    <section id="projects" class="bg-[#F5F1E8]">
+    <section id="projects" class="bg-[#F5F1E8] scroll-mt-24">
         <div class="mx-auto max-w-7xl px-6 py-24 lg:px-8">
             <div class="flex items-end justify-between gap-8">
                 <div>
@@ -199,7 +199,7 @@
     </section>
 
     {{-- Experience --}}
-    <section id="experience" class="bg-[#FFFDF7]">
+    <section id="experience" class="bg-[#FFFDF7] scroll-mt-24">
         <div class="mx-auto max-w-7xl px-6 py-24 lg:px-8">
             <div class="grid gap-12 lg:grid-cols-3">
                 {{-- Section heading --}}
@@ -255,7 +255,7 @@
     </section>
 
     {{-- Skills --}}
-    <section id="skills" class="bg-[#F5F1E8]">
+    <section id="skills" class="bg-[#F5F1E8] scroll-mt-24">
         <div class="mx-auto max-w-7xl px-6 py-24 lg:px-8">
             <div class="max-w-2xl">
                 <p
