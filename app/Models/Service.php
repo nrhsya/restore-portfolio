@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\ContactMessage;
 use Illuminate\Database\Eloquent\Model;
 
 class Service extends Model
@@ -13,5 +14,10 @@ class Service extends Model
         return [
             'featured' => 'boolean',
         ];
+    }
+
+    public function contactMessages()
+    {
+        return $this->hasMany(ContactMessage::class);
     }
 }
