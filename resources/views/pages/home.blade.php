@@ -289,4 +289,151 @@
             </div>
         </div>
     </section>
+
+    {{-- Contact --}}
+    <section id="contact" class="scroll-mt-24 bg-[#FFFDF7]">
+        <div class="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+            <div class="grid gap-16 lg:grid-cols-2">
+                {{-- Introduction --}}
+                <div>
+                    <p class="text-sm font-medium uppercase tracking-[0.2em] text-[#7F9473]">
+                        Contact
+                    </p>
+
+                    <h2 class="mt-4 max-w-lg text-4xl font-semibold leading-tight sm:text-5xl">
+                        Have something in mind?
+                    </h2>
+
+                    <p class="mt-6 max-w-lg leading-7 text-[#77766F]">
+                        Whether it's a project, collaboration, opportunity,
+                        or you just want to say hello — feel free to leave
+                        me a message.
+                    </p>
+                </div>
+
+                {{-- Form --}}
+                <div>
+                    @if (session('success'))
+                        <div class="mb-8 rounded-2xl border border-[#7F9473]/30 bg-[#A8B89A]/20 p-5">
+                            <p class="text-sm text-[#343532]">
+                                {{ session('success') }}
+                            </p>
+                        </div>
+                    @endif
+                    <form
+                        action="{{ route('contact.store') }}"
+                        method="POST"
+                        class="space-y-6">
+
+                        @csrf
+
+                        {{-- Name --}}
+                        <div>
+                            <label
+                                for="name"
+                                class="mb-2 block text-sm font-medium">
+                                Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                value="{{ old('name') }}"
+                                required
+                                class="w-full rounded-2xl border border-[#343532]/15 bg-[#F5F1E8] px-5 py-4 outline-none transition focus:border-[#7F9473]"
+                                placeholder="Your name">
+
+                            @error('name')
+                                <p class="mt-2 text-sm text-red-600">
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
+
+                        {{-- Email --}}
+                        <div>
+                            <label
+                                for="email"
+                                class="mb-2 block text-sm font-medium">
+                                Email
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                value="{{ old('email') }}"
+                                required
+                                class="w-full rounded-2xl border border-[#343532]/15 bg-[#F5F1E8] px-5 py-4 outline-none transition focus:border-[#7F9473]"
+                                placeholder="you@example.com">
+
+                            @error('email')
+                                <p class="mt-2 text-sm text-red-600">
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
+
+                        {{-- Subject --}}
+                        <div>
+                            <label
+                                for="subject"
+                                class="mb-2 block text-sm font-medium">
+                                Subject
+                                <span class="text-[#77766F]">
+                                    (optional)
+                                </span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="subject"
+                                name="subject"
+                                value="{{ old('subject') }}"
+                                class="w-full rounded-2xl border border-[#343532]/15 bg-[#F5F1E8] px-5 py-4 outline-none transition focus:border-[#7F9473]"
+                                placeholder="What would you like to talk about?">
+
+                            @error('subject')
+                                <p class="mt-2 text-sm text-red-600">
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
+
+                        {{-- Message --}}
+                        <div>
+                            <label
+                                for="message"
+                                class="mb-2 block text-sm font-medium">
+                                Message
+                            </label>
+
+                            <textarea
+                                id="message"
+                                name="message"
+                                rows="6"
+                                required
+                                class="w-full resize-none rounded-2xl border border-[#343532]/15 bg-[#F5F1E8] px-5 py-4 outline-none transition focus:border-[#7F9473]"
+                                placeholder="Tell me a little about what you have in mind...">
+                                {{ old('message') }}
+                            </textarea>
+
+                            @error('message')
+                                <p class="mt-2 text-sm text-red-600">
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="rounded-full bg-[#343532] px-7 py-3.5 text-sm font-medium text-white transition hover:bg-[#7F9473]">
+                            Send message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection

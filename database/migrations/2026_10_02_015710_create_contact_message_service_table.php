@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contact_message_service', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('contact_message_id')
-                ->constrained()
-                ->cascadeOnDelete();
-            $table->foreignId('service_id')
-                ->constrained()
-                ->cascadeOnDelete();
-            $table->timestamps();
-        });
+        // Schema::create('contact_message_service', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->foreignId('contact_message_id')
+        //         ->constrained()
+        //         ->cascadeOnDelete();
+        //     $table->foreignId('service_id')
+        //         ->constrained()
+        //         ->cascadeOnDelete();
+        //     $table->timestamps();
+        // });
     }
 
     /**
