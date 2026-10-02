@@ -15,6 +15,8 @@ class Experience extends Model
     {
         return [
             'is_current' => 'boolean',
+            'start_date' => 'date',
+            'end_date' => 'date',
         ];
     }
 

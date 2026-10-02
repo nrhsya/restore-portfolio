@@ -82,56 +82,45 @@
         class="bg-[#FFFDF7]"
     >
         <div class="mx-auto max-w-7xl px-6 py-24 lg:px-8">
-
-            <div class="grid gap-12 lg:grid-cols-3">
-
-                <div>
-                    <p class="text-sm font-medium uppercase tracking-[0.2em] text-[#7F9473]">
-                        About me
-                    </p>
-                </div>
-
-                <div class="lg:col-span-2">
-
-                    <h2 class="max-w-3xl text-3xl font-semibold leading-tight sm:text-4xl">
-                        I like building things that make complicated processes
-                        feel a little simpler.
-                    </h2>
-
-                    <div class="mt-8 max-w-2xl space-y-5 text-base leading-7 text-[#77766F]">
-
-                        <p>
-                            I'm Hasya, a web developer working primarily with
-                            Laravel and PHP to build web applications and
-                            internal systems.
+            @if ($profile)
+                <div class="grid gap-12 lg:grid-cols-3">
+                    <div>
+                        <p class="text-sm font-medium uppercase tracking-[0.2em] text-[#7F9473]">
+                            About me
                         </p>
-
-                        <p>
-                            Outside of work, I enjoy experimenting with new
-                            technologies, building little projects, and finding
-                            increasingly unnecessary ways to make them more fun.
-                        </p>
-
                     </div>
 
+                    <div class="lg:col-span-2">
+                        @if ($profile->short_bio)
+                            <div>
+                                <h2 class="max-w-3xl text-3xl font-semibold leading-tight sm:text-4xl">
+                                    {!! $profile->short_bio !!}
+                                </h2>
+                            </div>
+                        @endif
+
+                        <div class="mt-8 max-w-2xl space-y-5 text-base leading-7 text-[#77766F]">
+                            <div class="mt-8 max-w-2xl space-y-5 text-base leading-7 text-[#77766F]">
+                                @if ($profile->bio)
+                                    <div>
+                                        <span>
+                                            {!! $profile->bio !!}
+                                        </span>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-            </div>
-
+            @endif
         </div>
     </section>
 
     {{-- Projects --}}
-    <section
-        id="projects"
-        class="bg-[#F5F1E8]"
-    >
+    <section id="projects" class="bg-[#F5F1E8]">
         <div class="mx-auto max-w-7xl px-6 py-24 lg:px-8">
-
             <div class="flex items-end justify-between gap-8">
-
                 <div>
-
                     <p class="text-sm font-medium uppercase tracking-[0.2em] text-[#7F9473]">
                         Selected work
                     </p>
@@ -139,7 +128,6 @@
                     <h2 class="mt-4 text-3xl font-semibold sm:text-4xl">
                         Things I've built.
                     </h2>
-
                 </div>
 
                 <a
@@ -148,33 +136,157 @@
                 >
                     View all projects →
                 </a>
-
             </div>
 
             <div class="mt-12 grid gap-6 md:grid-cols-2">
+                <div class="mt-12 grid gap-6 md:grid-cols-2">
+                    @forelse ($projects as $project)
+                        <article
+                            class="group rounded-3xl border border-[#343532]/10 bg-[#FFFDF7] p-8 transition hover:-translate-y-1 hover:shadow-lg"
+                        >
+                            @if ($project->thumbnail)
+                                <div class="mb-8 aspect-video overflow-hidden rounded-2xl">
+                                    <img
+                                        src="{{ Storage::url($project->thumbnail->image) }}"
+                                        alt="{{ $project->title }}"
+                                        class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                                    >
+                                </div>
+                            @endif
+                            <div class="mb-16 flex items-center justify-between">
+                                <span class="rounded-full bg-[#A8B89A]/30 px-3 py-1 text-xs">
+                                    Project
+                                </span>
 
-                {{-- Temporary project --}}
-                <article class="rounded-3xl border border-[#343532]/10 bg-[#FFFDF7] p-8">
+                                <span class="text-[#77766F] transition group-hover:translate-x-1">
+                                    →
+                                </span>
+                            </div>
 
-                    <div class="mb-16">
-                        <span class="rounded-full bg-[#A8B89A]/30 px-3 py-1 text-xs">
-                            Laravel
-                        </span>
-                    </div>
+                            <h3 class="text-2xl font-semibold">
+                                {{ $project->title }}
+                            </h3>
 
-                    <h3 class="text-2xl font-semibold">
-                        Project coming soon
-                    </h3>
+                            @if ($project->short_description)
+                                <p class="mt-3 leading-7 text-[#77766F]">
+                                    {{ $project->short_description }}
+                                </p>
+                            @endif
 
-                    <p class="mt-3 text-[#77766F]">
-                        This will soon be populated directly from the
-                        portfolio backoffice.
-                    </p>
+                            @if ($project->skills->isNotEmpty())
+                                <div class="mt-6 flex flex-wrap gap-2">
+                                    @foreach ($project->skills->take(5) as $skill)
+                                        <span
+                                            class="rounded-full bg-[#F5F1E8] px-3 py-1 text-xs text-[#77766F]"
+                                        >
+                                            {{ $skill->name }}
+                                        </span>
+                                    @endforeach
+                                </div>
+                            @endif
+                        </article>
+                    @empty
+                        <div class="rounded-3xl border border-dashed border-[#343532]/20 p-10 text-center">
+                            <p class="text-[#77766F]">
+                                Something is being built here...
+                            </p>
 
-                </article>
+                        </div>
+                    @endforelse
+                </div>
+            </div>
+        </div>
+    </section>
 
+    {{-- Experience --}}
+    <section id="experience" class="bg-[#FFFDF7]">
+        <div class="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+            <div class="grid gap-12 lg:grid-cols-3">
+                {{-- Section heading --}}
+                <div>
+                    <p class="text-sm font-medium uppercase tracking-[0.2em] text-[#7F9473]">Experience</p>
+
+                    <h2 class="mt-4 text-3xl font-semibold">
+                        Where I've worked.
+                    </h2>
+                </div>
+
+                {{-- Experience list --}}
+                <div class="lg:col-span-2">
+                    @forelse ($experiences as $experience)
+                        <article
+                            class="border-b border-[#343532]/10 py-8 first:pt-0"
+                        >
+                            <div
+                                class="flex flex-col justify-between gap-4 sm:flex-row"
+                            >
+                                <div>
+                                    <h3 class="text-xl font-semibold">
+                                        {{ $experience->position }}
+                                    </h3>
+
+                                    <p class="mt-1 text-[#77766F]">
+                                        {{ $experience->company }}
+                                    </p>
+                                </div>
+                                <div class="shrink-0 text-sm text-[#77766F]">
+                                    {{ $experience->start_date->format('M Y') }}
+                                    —
+                                    {{ $experience->end_date?->format('M Y') ?? 'Present' }}
+                                </div>
+                            </div>
+
+                            @if ($experience->description)
+                                <div
+                                    class="mt-5 max-w-2xl leading-7 text-[#77766F]"
+                                >
+                                    {!! $experience->description !!}
+                                </div>
+                            @endif
+                        </article>
+                    @empty
+                        <p class="text-[#77766F]">
+                            Experience is being added.
+                        </p>
+                    @endforelse
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- Skills --}}
+    <section id="skills" class="bg-[#F5F1E8]">
+        <div class="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+            <div class="max-w-2xl">
+                <p
+                    class="text-sm font-medium uppercase tracking-[0.2em] text-[#7F9473]"
+                >
+                    Toolkit
+                </p>
+
+                <h2 class="mt-4 text-3xl font-semibold sm:text-4xl">
+                    Things I build with.
+                </h2>
+
+                <p class="mt-5 leading-7 text-[#77766F]">
+                    Technologies and tools I've worked with across
+                    different projects.
+                </p>
             </div>
 
+            <div class="mt-12 flex flex-wrap gap-3">
+                @forelse ($skills as $skill)
+                    <span
+                        class="rounded-full border border-[#343532]/10 bg-[#FFFDF7] px-5 py-3 text-sm transition hover:-translate-y-1 hover:border-[#7F9473]"
+                    >
+                        {{ $skill->name }}
+                    </span>
+                @empty
+                    <p class="text-[#77766F]">
+                        Skills are being added.
+                    </p>
+                @endforelse
+            </div>
         </div>
     </section>
 @endsection
