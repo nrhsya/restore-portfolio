@@ -130,10 +130,7 @@
                     </h2>
                 </div>
 
-                <a
-                    href="#"
-                    class="hidden text-sm font-medium md:block"
-                >
+                <a href="{{ route('projects.index') }}">
                     View all projects →
                 </a>
             </div>
@@ -158,9 +155,11 @@
                                     Project
                                 </span>
 
-                                <span class="text-[#77766F] transition group-hover:translate-x-1">
-                                    →
-                                </span>
+                                <a href="{{ route('projects.show', ['project' => $project->slug]) }}">
+                                    <span class="text-[#77766F] transition group-hover:translate-x-1">
+                                        →
+                                    </span>
+                                </a>
                             </div>
 
                             <h3 class="text-2xl font-semibold">
