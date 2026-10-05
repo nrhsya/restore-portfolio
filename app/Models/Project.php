@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Experience;
 use App\Models\ProjectImage;
+use App\Models\ProjectSection;
 use App\Models\Skill;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -38,6 +39,11 @@ class Project extends Model
     {
         return $this->hasMany(ProjectImage::class)
             ->where('is_thumbnail', false);
+    }
+
+    public function sections(): HasMany
+    {
+        return $this->hasMany(ProjectSection::class)->orderBy('sort_order');
     }
 
     public function skills(): BelongsToMany

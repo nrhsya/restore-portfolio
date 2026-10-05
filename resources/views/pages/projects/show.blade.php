@@ -159,6 +159,55 @@
     </section>
 @endif
 
+{{-- Project Sections --}}
+@if ($project->sections->isNotEmpty())
+    <section class="bg-[#FFFDF7]">
+        <div class="mx-auto max-w-7xl px-6 pb-24 lg:px-8">
+            <div class="space-y-20">
+                @foreach ($project->sections as $section)
+                    <div class="grid gap-8 lg:grid-cols-3">
+                        {{-- Section title --}}
+                        <div>
+                            <h2
+                                class="text-sm font-medium uppercase tracking-[0.2em] text-[#7F9473]"
+                            >
+                                {{ $section->title }}
+                            </h2>
+                        </div>
+
+                        {{-- Content --}}
+                        <div class="min-w-0 lg:col-span-2">
+                            <div
+                                class="max-w-3xl wrap-break-word text-base leading-8 text-[#77766F]
+                                       [&_p]:mb-5
+                                       [&_strong]:font-semibold
+                                       [&_strong]:text-[#343532]
+                                       [&_h2]:mb-4
+                                       [&_h2]:mt-8
+                                       [&_h2]:text-2xl
+                                       [&_h2]:font-semibold
+                                       [&_h2]:text-[#343532]
+                                       [&_h3]:mb-3
+                                       [&_h3]:mt-6
+                                       [&_h3]:text-xl
+                                       [&_h3]:font-semibold
+                                       [&_h3]:text-[#343532]
+                                       [&_ul]:mb-5
+                                       [&_ul]:list-disc
+                                       [&_ul]:pl-6
+                                       [&_ol]:mb-5
+                                       [&_ol]:list-decimal
+                                       [&_ol]:pl-6"
+                            >
+                                {!! $section->content !!}
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+@endif
 
 {{-- Project Gallery --}}
 @if ($project->galleryImages->isNotEmpty())

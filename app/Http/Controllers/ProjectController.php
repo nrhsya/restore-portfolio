@@ -29,6 +29,7 @@ class ProjectController extends Controller
             'thumbnail',
             'skills',
             'galleryImages',
+            'sections',
         ]);
 
         return view('pages.projects.show', compact('project'));
