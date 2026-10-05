@@ -16,27 +16,27 @@
 
         {{-- Desktop navigation --}}
         <div class="hidden items-center gap-8 md:flex">
-            <a href="#about"
+            <a href="{{ route('home') }}#about"
                 class="text-sm text-[#77766F] transition hover:text-[#343532]">
                 About
             </a>
 
-            <a href="#projects"
+            <a href="{{ route('home') }}#projects"
                 class="text-sm text-[#77766F] transition hover:text-[#343532]">
                 Projects
             </a>
 
-            <a href="#experience"
+            <a href="{{ route('home') }}#experience"
                 class="text-sm text-[#77766F] transition hover:text-[#343532]">
                 Experience
             </a>
 
-            <a href="#skills"
+            <a href="{{ route('home') }}#skills"
                 class="text-sm text-[#77766F] transition hover:text-[#343532]">
                 Skills
             </a>
 
-            <a href="#contact"
+            <a href="{{ route('home') }}#contact"
                 class="rounded-full bg-[#343532] px-5 py-2.5 text-sm text-white transition hover:bg-[#7F9473]">
                 Let's talk
             </a>
@@ -95,31 +95,31 @@
         class="border-t border-[#343532]/10 md:hidden"
     >
         <div class="flex flex-col px-6 py-6">
-            <a href="#about"
+            <a href="{{ route('home') }}#about"
                 x-on:click="open = false"
                 class="border-b border-[#343532]/10 py-4">
                 About
             </a>
 
-            <a href="#projects"
+            <a href="{{ route('home') }}#projects"
                 x-on:click="open = false"
                 class="border-b border-[#343532]/10 py-4">
                 Projects
             </a>
 
-            <a href="#experience"
+            <a href="{{ route('home') }}#experience"
                 x-on:click="open = false"
                 class="border-b border-[#343532]/10 py-4">
                 Experience
             </a>
 
-            <a href="#skills"
+            <a href="{{ route('home') }}#skills"
                 x-on:click="open = false"
                 class="border-b border-[#343532]/10 py-4">
                 Skills
             </a>
 
-            <a href="#contact"
+            <a href="{{ route('home') }}#contact"
                 x-on:click="open = false"
                 class="py-4">
                 Let's talk

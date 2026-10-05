@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use Illuminate\View\View;
 
 class ProjectController extends Controller
 {
@@ -20,18 +21,34 @@ class ProjectController extends Controller
         return view('pages.projects.index', compact('projects'));
     }
 
-    public function show(Project $project)
+    public function show(Project $project): View
     {
         // prevents users from accessing projects that are not published
         abort_unless($project->status, 404);
 
         $project->load([
             'thumbnail',
-            'skills',
             'galleryImages',
+            'skills',
             'sections',
         ]);
 
-        return view('pages.projects.show', compact('project'));
+        $previousProject = Project::query()
+            ->where('status', true)
+            ->where('published_at', '<', $project->published_at)
+            ->orderByDesc('published_at')
+            ->first();
+
+        $nextProject = Project::query()
+            ->where('status', true)
+            ->where('published_at', '>', $project->published_at)
+            ->orderBy('published_at')
+            ->first();
+
+        return view('pages.projects.show', compact(
+            'project',
+            'previousProject',
+            'nextProject',
+        ));
     }
 }

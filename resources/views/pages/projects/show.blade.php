@@ -252,35 +252,62 @@
 @endif
 
 
-{{-- Bottom Navigation --}}
+{{-- Project Navigation --}}
 <section class="bg-[#343532] text-[#F5F1E8]">
-
     <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
-
-        <div class="flex flex-col justify-between gap-8 sm:flex-row sm:items-center">
-
+        <div class="grid gap-10 md:grid-cols-2">
+            {{-- Previous Project --}}
             <div>
-                <p class="text-sm text-[#A8B89A]">
-                    Keep exploring
-                </p>
+                @if ($previousProject)
+                    <a
+                        href="{{ route('projects.show', $previousProject) }}"
+                        class="group block"
+                    >
+                        <p class="text-sm text-[#A8B89A]">
+                            ← Previous project
+                        </p>
 
-                <h2 class="mt-2 text-3xl font-semibold">
-                    More things I've built.
-                </h2>
+                        <h2
+                            class="mt-3 text-2xl font-semibold transition group-hover:text-[#A8B89A]"
+                        >
+                            {{ $previousProject->title }}
+                        </h2>
+                    </a>
+                @endif
             </div>
 
-            <a
-                href="{{ route('projects.index') }}"
-                class="inline-flex items-center gap-2 text-sm font-medium"
-            >
-                View all projects
-                <span>→</span>
-            </a>
 
+            {{-- Next Project --}}
+            <div class="md:text-right">
+                @if ($nextProject)
+                    <a
+                        href="{{ route('projects.show', $nextProject) }}"
+                        class="group block"
+                    >
+                        <p class="text-sm text-[#A8B89A]">
+                            Next project →
+                        </p>
+
+                        <h2
+                            class="mt-3 text-2xl font-semibold transition group-hover:text-[#A8B89A]"
+                        >
+                            {{ $nextProject->title }}
+                        </h2>
+                    </a>
+                @endif
+            </div>
         </div>
 
+        {{-- All Projects --}}
+        <div class="mt-16 border-t border-white/10 pt-8 text-center">
+            <a
+                href="{{ route('projects.index') }}"
+                class="text-sm text-[#F5F1E8]/70 transition hover:text-white"
+            >
+                View all projects
+            </a>
+        </div>
     </div>
-
 </section>
 
 @endsection
