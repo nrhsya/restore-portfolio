@@ -94,7 +94,8 @@ class ProjectForm
                     ->url(),
                 TextInput::make('live_url')
                     ->url(),
-                DateTimePicker::make('published_at'),
+                DateTimePicker::make('published_at')
+                    ->required(),
             ]);
     }
 }
