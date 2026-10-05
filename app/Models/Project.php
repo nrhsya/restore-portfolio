@@ -42,4 +42,9 @@ class Project extends Model
     {
         return $this->belongsToMany(Experience::class);
     }
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 }
