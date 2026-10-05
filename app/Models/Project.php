@@ -33,6 +33,13 @@ class Project extends Model
             ->where('is_thumbnail', true);
     }
 
+    // to display only non thumbnail images in the gallery section of the project show page
+    public function galleryImages(): HasMany
+    {
+        return $this->hasMany(ProjectImage::class)
+            ->where('is_thumbnail', false);
+    }
+
     public function skills(): BelongsToMany
     {
         return $this->belongsToMany(Skill::class);
@@ -41,10 +48,5 @@ class Project extends Model
     public function experiences(): BelongsToMany
     {
         return $this->belongsToMany(Experience::class);
-    }
-
-    public function getRouteKeyName(): string
-    {
-        return 'slug';
     }
 }

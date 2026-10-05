@@ -26,8 +26,9 @@ class ProjectController extends Controller
         abort_unless($project->status, 404);
 
         $project->load([
-            'projectImages',
+            'thumbnail',
             'skills',
+            'galleryImages',
         ]);
 
         return view('pages.projects.show', compact('project'));
