@@ -289,6 +289,93 @@
         </div>
     </section>
 
+    {{-- Services --}}
+    @if ($services->isNotEmpty())
+        <section id="services" class="scroll-mt-24 bg-[#FFFDF7]">
+            <div class="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+                {{-- Section Header --}}
+                <div class="max-w-2xl">
+                    <p class="text-sm font-medium uppercase tracking-[0.2em] text-[#7F9473]">
+                        Services
+                    </p>
+
+                    <h2 class="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
+                        How I can help.
+                    </h2>
+
+                    <p class="mt-5 leading-7 text-[#77766F]">
+                        A few ways I can help turn ideas, improvements,
+                        and technical requirements into working web experiences.
+                    </p>
+                </div>
+
+                {{-- Service Cards --}}
+                <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    @foreach ($services as $service)
+                        <article class="group flex h-full flex-col rounded-3xl border border-[#343532]/10 bg-[#F5F1E8] p-8 transition duration-300 hover:-translate-y-1 hover:shadow-lg">
+                            {{-- Number --}}
+                            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-[#A8B89A]/20 text-sm font-medium text-[#7F9473]">
+                                {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}
+                            </div>
+
+                            {{-- Service Information --}}
+                            <div class="mt-8 flex-1">
+                                <h3 class="text-xl font-semibold text-[#343532]">
+                                    {{ $service->title }}
+                                </h3>
+
+                                <div
+                                    class="mt-4 wrap-break-word leading-7 text-[#77766F]
+                                        [&_p]:mb-4
+                                        [&_p:last-child]:mb-0
+                                        [&_ul]:list-disc
+                                        [&_ul]:pl-5
+                                        [&_ol]:list-decimal
+                                        [&_ol]:pl-5">
+                                    {!! $service->description !!}
+                                </div>
+                            </div>
+
+                            {{-- Contact CTA --}}
+                            <div class="mt-8 border-t border-[#343532]/10 pt-6">
+                                <a href="{{ route('home', ['service' => $service->title]) }}#contact"
+                                    class="inline-flex items-center gap-2 text-sm font-medium text-[#7F9473]">
+                                    Ask about this service
+
+                                    <span class="transition-transform duration-300 group-hover:translate-x-1">
+                                        →
+                                    </span>
+                                </a>
+                            </div>
+                        </article>
+                    @endforeach
+                </div>
+
+                {{-- Services CTA --}}
+                <div class="mt-16 flex flex-col gap-6 rounded-3xl bg-[#343532] px-8 py-10 text-[#F5F1E8] sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-[#A8B89A]">
+                            Have something in mind?
+                        </p>
+
+                        <h3 class="mt-2 text-2xl font-semibold">
+                            Let's build something together.
+                        </h3>
+
+                        <p class="mt-3 max-w-xl leading-7 text-[#F5F1E8]/70">
+                            Tell me a little about what you're working on and how I might be able to help.
+                        </p>
+                    </div>
+
+                    <a href="{{ route('home') }}#contact"
+                        class="shrink-0 rounded-full bg-[#F5F1E8] px-6 py-3 text-sm font-medium text-[#343532] transition hover:bg-[#A8B89A]">
+                        Get in touch
+                    </a>
+                </div>
+            </div>
+        </section>
+    @endif
+
     {{-- Contact --}}
     <section id="contact" class="scroll-mt-24 bg-[#FFFDF7]">
         <div class="mx-auto max-w-7xl px-6 py-24 lg:px-8">
@@ -389,7 +476,7 @@
                                 type="text"
                                 id="subject"
                                 name="subject"
-                                value="{{ old('subject') }}"
+                                value="{{ old('subject', request()->query('service') ? 'Inquiry about ' . request()->query('service') : '') }}"
                                 class="w-full rounded-2xl border border-[#343532]/15 bg-[#F5F1E8] px-5 py-4 outline-none transition focus:border-[#7F9473]"
                                 placeholder="What would you like to talk about?">
 

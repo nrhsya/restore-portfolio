@@ -36,6 +36,11 @@
                 Skills
             </a>
 
+            <a href="{{ route('home') }}#services"
+                class="text-sm text-[#77766F] transition hover:text-[#343532]">
+                Services
+            </a>
+
             <a href="{{ route('home') }}#contact"
                 class="rounded-full bg-[#343532] px-5 py-2.5 text-sm text-white transition hover:bg-[#7F9473]">
                 Let's talk
@@ -117,6 +122,12 @@
                 x-on:click="open = false"
                 class="border-b border-[#343532]/10 py-4">
                 Skills
+            </a>
+
+            <a href="{{ route('home') }}#services"
+                x-on:click="open = false"
+                class="border-b border-[#343532]/10 py-4">
+                Services
             </a>
 
             <a href="{{ route('home') }}#contact"
