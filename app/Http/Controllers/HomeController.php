@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Experience;
 use App\Models\Profile;
 use App\Models\Project;
+use App\Models\Service;
 use App\Models\Skill;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,10 @@ class HomeController extends Controller
         $profile = Profile::first();
 
         $projects = Project::query()
-            ->with('thumbnail', 'skills')
+            ->with([
+                'thumbnail',
+                'skills',
+            ])
             ->where('status', true)
             ->where('featured', true)
             ->latest()
@@ -30,11 +34,17 @@ class HomeController extends Controller
             ->orderBy('name')
             ->get();
 
+        $services = Service::query()
+            ->where('status', true)
+            ->orderBy('sort_order')
+            ->get();
+
         return view('pages.home', compact(
             'profile',
             'projects',
             'experiences',
-            'skills'
+            'skills',
+            'services'
         ));
     }
 }
