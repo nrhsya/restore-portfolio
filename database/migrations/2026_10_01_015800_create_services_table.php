@@ -14,11 +14,9 @@ return new class extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('slug')->unique();
-            $table->text('description')->nullable();
-            $table->string('icon')->nullable();
-            $table->boolean('featured')->default(false);
+            $table->text('description');
             $table->unsignedInteger('sort_order')->default(0);
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

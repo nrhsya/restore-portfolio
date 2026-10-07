@@ -7,6 +7,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 
 class ServicesTable
@@ -16,29 +17,33 @@ class ServicesTable
         return $table
             ->columns([
                 TextColumn::make('title')
-                    ->searchable(),
-                TextColumn::make('slug')
-                    ->searchable(),
-                TextColumn::make('icon')
-                    ->searchable(),
-                IconColumn::make('featured')
-                    ->boolean(),
+                    ->label('Service')
+                    ->searchable()
+                    ->sortable(),
+
+                TextColumn::make('description')
+                    ->label('Description')
+                    ->html()
+                    ->limit(60),
+
                 TextColumn::make('sort_order')
-                    ->numeric()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->label('Order')
+                    ->sortable(),
+
+                IconColumn::make('status')
+                    ->label('Active')
+                    ->boolean(),
+
                 TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->label('Last Updated')
+                    ->since()
+                    ->sortable(),
             ])
             ->filters([
-                //
+                TernaryFilter::make('status')
+                    ->label('Active'),
             ])
+            ->defaultSort('sort_order')
             ->recordActions([
                 EditAction::make(),
             ])

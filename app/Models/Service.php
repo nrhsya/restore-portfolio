@@ -12,7 +12,7 @@ class Service extends Model
     protected function casts(): array
     {
         return [
-            'featured' => 'boolean',
+            'status' => 'boolean',
         ];
     }
 
