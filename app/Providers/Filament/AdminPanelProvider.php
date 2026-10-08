@@ -4,8 +4,10 @@ namespace App\Providers\Filament;
 
 use App\Filament\Pages\Profile;
 use App\Filament\Pages\Settings;
+use App\Filament\Widgets\MostViewedProjects;
 use App\Filament\Widgets\PortfolioStatsOverview;
 use App\Filament\Widgets\StatsOverview;
+use App\Filament\Widgets\VisitorChart;
 use Filament\Actions\Action;
 use Filament\Enums\UserMenuPosition;
 use Filament\Http\Middleware\Authenticate;
@@ -57,6 +59,8 @@ class AdminPanelProvider extends PanelProvider
                 // FilamentInfoWidget::class,
                 // StatsOverview::class,
                 PortfolioStatsOverview::class,
+                VisitorChart::class,
+                MostViewedProjects::class,
             ])
             ->unsavedChangesAlerts()
             ->middleware([
