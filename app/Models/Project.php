@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Experience;
+use App\Models\PageVisit;
 use App\Models\ProjectImage;
 use App\Models\ProjectSection;
 use App\Models\Skill;
@@ -54,5 +55,11 @@ class Project extends Model
     public function experiences(): BelongsToMany
     {
         return $this->belongsToMany(Experience::class);
+    }
+
+    public function pageVisits(): HasMany
+    {
+        return $this->hasMany(PageVisit::class, 'page_id')
+            ->where('page_type', 'project');
     }
 }

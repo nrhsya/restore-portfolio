@@ -4,7 +4,11 @@ namespace App\Providers\Filament;
 
 use App\Filament\Pages\Profile;
 use App\Filament\Pages\Settings;
+use App\Filament\Widgets\MostViewedProjects;
+use App\Filament\Widgets\PortfolioStatsOverview;
 use App\Filament\Widgets\StatsOverview;
+use App\Filament\Widgets\TrafficSources;
+use App\Filament\Widgets\VisitorChart;
 use Filament\Actions\Action;
 use Filament\Enums\UserMenuPosition;
 use Filament\Http\Middleware\Authenticate;
@@ -45,13 +49,20 @@ class AdminPanelProvider extends PanelProvider
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
-                // Dashboard::class,
+                Dashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
+            ->discoverWidgets(
+                in: app_path('Filament/Widgets'),
+                for: 'App\Filament\Widgets',
+            )
             ->widgets([
                 // AccountWidget::class,
                 // FilamentInfoWidget::class,
-                StatsOverview::class,
+                // StatsOverview::class,
+                PortfolioStatsOverview::class,
+                VisitorChart::class,
+                TrafficSources::class,
+                MostViewedProjects::class,
             ])
             ->unsavedChangesAlerts()
             ->middleware([
