@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 use App\Filament\Pages\Profile;
 use App\Filament\Pages\Settings;
+use App\Filament\Widgets\PortfolioStatsOverview;
 use App\Filament\Widgets\StatsOverview;
 use Filament\Actions\Action;
 use Filament\Enums\UserMenuPosition;
@@ -45,13 +46,17 @@ class AdminPanelProvider extends PanelProvider
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
-                // Dashboard::class,
+                Dashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
+            ->discoverWidgets(
+                in: app_path('Filament/Widgets'),
+                for: 'App\Filament\Widgets',
+            )
             ->widgets([
                 // AccountWidget::class,
                 // FilamentInfoWidget::class,
-                StatsOverview::class,
+                // StatsOverview::class,
+                PortfolioStatsOverview::class,
             ])
             ->unsavedChangesAlerts()
             ->middleware([
