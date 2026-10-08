@@ -7,6 +7,7 @@ use App\Filament\Pages\Settings;
 use App\Filament\Widgets\MostViewedProjects;
 use App\Filament\Widgets\PortfolioStatsOverview;
 use App\Filament\Widgets\StatsOverview;
+use App\Filament\Widgets\TrafficSources;
 use App\Filament\Widgets\VisitorChart;
 use Filament\Actions\Action;
 use Filament\Enums\UserMenuPosition;
@@ -60,6 +61,7 @@ class AdminPanelProvider extends PanelProvider
                 // StatsOverview::class,
                 PortfolioStatsOverview::class,
                 VisitorChart::class,
+                TrafficSources::class,
                 MostViewedProjects::class,
             ])
             ->unsavedChangesAlerts()
