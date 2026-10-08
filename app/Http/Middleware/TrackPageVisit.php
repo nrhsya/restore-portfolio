@@ -3,25 +3,24 @@
 namespace App\Http\Middleware;
 
 use App\Models\PageVisit;
+use App\Models\Project;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Models\Project;
 
 class TrackPageVisit
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  Closure(Request): (Response)  $next
-     */
     public function handle(Request $request, Closure $next): Response
     {
         $response = $next($request);
 
-        // to avoid including me visiting the admin page from adding to the page visit count
-        // Don't track Filament/admin pages.
+        // Don't track admin pages. only track anyone who visits the portfolio
         if ($request->is('admin') || $request->is('admin/*')) {
+            return $response;
+        }
+
+        // Don't track authenticated users.
+        if ($request->user()) {
             return $response;
         }
 
